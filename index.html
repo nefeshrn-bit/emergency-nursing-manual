@@ -1,0 +1,478 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ספר חירום סיעודי – בית חולים</title>
+  <style>
+    :root{
+      --bg:#0b1220; --panel:#101a33; --card:#0f1a33;
+      --text:#eaf0ff; --muted:#b8c6ee; --accent:#4ea1ff;
+      --border:rgba(255,255,255,.12); --shadow:0 10px 28px rgba(0,0,0,.35);
+      --r:16px; --max:1200px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0; font-family:system-ui,-apple-system,"Segoe UI",Arial,"Noto Sans Hebrew",sans-serif;
+      background: radial-gradient(1100px 700px at 80% -10%, rgba(78,161,255,.22), transparent 60%),
+                  radial-gradient(900px 600px at 10% 0%, rgba(120,230,170,.16), transparent 55%),
+                  var(--bg);
+      color:var(--text); line-height:1.6;
+    }
+    a{color:inherit; text-decoration:none}
+    header{
+      max-width:var(--max); margin:0 auto; padding:16px 16px 0;
+      display:flex; gap:12px; align-items:flex-start; justify-content:space-between; flex-wrap:wrap;
+    }
+    .brand{display:flex; gap:10px; align-items:center}
+    .logo{width:42px;height:42px;border-radius:12px;background:linear-gradient(135deg, rgba(78,161,255,.95), rgba(120,230,170,.75)); box-shadow:var(--shadow)}
+    h1{margin:0; font-size:18px; font-weight:800}
+    .sub{margin:2px 0 0; color:var(--muted); font-size:12px}
+    .actions{display:flex; gap:10px; flex-wrap:wrap}
+    .btn{
+      border:1px solid var(--border); background:rgba(255,255,255,.06); color:var(--text);
+      padding:10px 12px; border-radius:12px; cursor:pointer; font-weight:700; font-size:13px;
+      transition:.15s ease;
+    }
+    .btn:hover{transform:translateY(-1px); border-color:rgba(78,161,255,.45)}
+    .btn.primary{background:rgba(78,161,255,.18); border-color:rgba(78,161,255,.45)}
+    .wrap{
+      max-width:var(--max); margin:0 auto; padding:16px;
+      display:grid; grid-template-columns:320px 1fr; gap:16px;
+    }
+    .panel{background:rgba(255,255,255,.04); border:1px solid var(--border); border-radius:var(--r); box-shadow:var(--shadow)}
+    .sidebar{position:sticky; top:12px; height:calc(100vh - 24px); overflow:hidden; display:flex; flex-direction:column}
+    .pad{padding:14px}
+    .search{
+      display:flex; gap:10px; align-items:center;
+      padding:12px; border-radius:14px; background:rgba(0,0,0,.18); border:1px solid var(--border);
+    }
+    .search input{width:100%; border:0; outline:none; background:transparent; color:var(--text); font-size:14px}
+    .nav{border-top:1px solid var(--border); padding:10px; overflow:auto}
+    .nav a{
+      display:flex; justify-content:space-between; align-items:center;
+      padding:10px 12px; border-radius:12px; margin-bottom:6px;
+      background:rgba(255,255,255,.03); color:var(--muted); border:1px solid transparent;
+    }
+    .nav a:hover{border-color:rgba(78,161,255,.35); color:var(--text)}
+    .badge{font-size:11px; padding:2px 8px; border-radius:999px; border:1px solid var(--border); color:var(--muted)}
+    .content{padding:14px}
+    .card{background:rgba(255,255,255,.04); border:1px solid var(--border); border-radius:var(--r); padding:16px; margin-bottom:14px}
+    h2{margin:0 0 8px; font-size:18px}
+    h3{margin:14px 0 6px; font-size:15px}
+    .muted{color:var(--muted)}
+    ul{margin:8px 0 0; padding-right:18px}
+    li{margin:6px 0}
+    details{
+      border:1px solid var(--border); border-radius:14px; padding:10px 12px; margin-top:10px;
+      background:rgba(0,0,0,.12)
+    }
+    summary{cursor:pointer}
+    .callout{
+      border-right:4px solid rgba(120,230,170,.9);
+      background:rgba(120,230,170,.08);
+      border:1px solid rgba(120,230,170,.18);
+      padding:12px; border-radius:14px; margin-top:10px;
+    }
+    .danger{border-right-color:rgba(255,90,90,.95); background:rgba(255,90,90,.08); border-color:rgba(255,90,90,.18)}
+    .grid2{display:grid; grid-template-columns:1fr 1fr; gap:12px}
+    .checklist label{display:flex; gap:10px; align-items:flex-start; padding:8px 0; border-bottom:1px dashed rgba(255,255,255,.10)}
+    .checklist label:last-child{border-bottom:0}
+    .checklist input{margin-top:3px; transform:scale(1.15)}
+    .pill{
+      display:inline-block; padding:3px 10px; border-radius:999px;
+      background:rgba(78,161,255,.14); border:1px solid rgba(78,161,255,.35); color:var(--text);
+      font-size:12px; font-weight:800;
+    }
+    table{width:100%; border-collapse:separate; border-spacing:0; overflow:hidden; border-radius:14px; border:1px solid var(--border); margin-top:10px}
+    th,td{padding:10px 12px; border-bottom:1px solid rgba(255,255,255,.08); vertical-align:top}
+    th{background:rgba(255,255,255,.06); text-align:right}
+    tr:last-child td{border-bottom:0}
+
+    @media (max-width: 920px){
+      .wrap{grid-template-columns:1fr}
+      .sidebar{position:relative; height:auto}
+    }
+    @media print{
+      header,.sidebar,.actions{display:none !important}
+      body{background:#fff; color:#000}
+      .panel,.card{box-shadow:none; border:1px solid #ddd}
+      a{text-decoration:none}
+    }
+  </style>
+</head>
+<body>
+<header>
+  <div class="brand">
+    <div class="logo" aria-hidden="true"></div>
+    <div>
+      <h1>ספר חירום סיעודי – צוותי אחיות/אחים</h1>
+      <div class="sub">מבוסס תיק חירום/פינוי מחלקתי • גרסה פנימית לצוות הסיעוד</div>
+    </div>
+  </div>
+  <div class="actions">
+    <button class="btn primary" onclick="window.print()">הדפסה / PDF</button>
+    <button class="btn" id="toggleAll">פתח/סגור הכל</button>
+    <button class="btn" onclick="window.scrollTo({top:0,behavior:'smooth'})">למעלה</button>
+  </div>
+</header>
+
+<main class="wrap">
+  <aside class="panel sidebar" aria-label="ניווט">
+    <div class="pad">
+      <div class="search">
+        <input id="q" type="search" placeholder="חיפוש (למשל: פינוי, שריפה, מוקד ביטחון, רעידת אדמה)..." />
+        <span class="badge">Ctrl+K</span>
+      </div>
+      <div class="callout" style="margin-top:10px">
+        <b>למי זה מיועד?</b><br/>
+        <span class="muted">צוות סיעוד בלבד. תמציתי, תפעולי, בזמן אמת.</span>
+      </div>
+    </div>
+    <nav class="nav" id="nav"></nav>
+  </aside>
+
+  <section class="panel content" id="content" aria-label="תוכן">
+
+    <div class="card" id="quick" data-title="דף מהיר">
+      <h2>דף מהיר</h2>
+      <div class="grid2">
+        <div class="callout danger">
+          <b>מוקד ביטחון</b>
+          <div class="muted">
+            באר יעקב: <span class="pill">8399 / 8240</span><br/>
+            נס ציונה: <span class="pill">4088 / 4166</span><br/>
+            כיבוי אש: <span class="pill">102</span>
+          </div>
+        </div>
+        <div class="callout">
+          <b>עיקרון מנחה</b>
+          <div class="muted">בטיחות מטופלים + יכולת הצוות להתארגן ולשלוט במצב.</div>
+        </div>
+      </div>
+      <p class="muted" style="margin-top:10px">
+        מומלץ לעדכן כאן: תאריך עדכון, שמות תורנים, מספרי קשר פנימיים נוספים, ומיקום מטה/חדר מצב.
+      </p>
+    </div>
+
+    <div class="card" id="roles" data-title="בעלי תפקידים – סיעוד">
+      <h2>בעלי תפקידים מרכזיים (בדגש סיעודי)</h2>
+      <p class="muted">הגדרות כלליות לתפעול פינוי: מי מוביל, מי מנהל מטה, ומי אחראי פינוי במחלקה.</p>
+
+      <table>
+        <thead>
+          <tr><th>תפקיד</th><th>בשעות פעילות</th><th>לאחר שעות פעילות</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><b>אחראי פינוי במחלקה</b></td>
+            <td>אחות אחראית / סגן</td>
+            <td>אחות אחראית משמרת</td>
+          </tr>
+          <tr>
+            <td><b>ניהול חדר מטה</b></td>
+            <td>הנהלה / מנב״ט</td>
+            <td>אחות/אח כללי/ת</td>
+          </tr>
+          <tr>
+            <td><b>צוות באתר השהייה</b></td>
+            <td colspan="2">אחות אחראית/סגן + 2 אחיות/אחים מהמחלקה</td>
+          </tr>
+          <tr>
+            <td><b>מרכז מידע למשפחות</b></td>
+            <td colspan="2">עו״ס ראשי + עו״סיות במחלקות</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="callout" style="margin-top:10px">
+        <b>הערה תפעולית</b>
+        <div class="muted">בשלבים הראשונים (עד הקמת מטה), התפעול מתבסס על תורן מחלקות/אחות כללית לפי השעה.</div>
+      </div>
+    </div>
+
+    <div class="card" id="evac-overview" data-title="פינוי בית חולים – כללי">
+      <h2>פינוי בית חולים – כללי</h2>
+      <ul>
+        <li>פינוי נדרש כשיש סכנה לבריאות/חיי מטופלים בחלקים מביה״ח או כולו.</li>
+        <li>יכול להיות פינוי מלא או חלקי (מחלקה/אגף/מבנה).</li>
+        <li>יכול להיות סדור/מתוכנן או דחוף.</li>
+      </ul>
+
+      <details>
+        <summary><b>מי אחראי בזמן אמת (לפי שעה)?</b></summary>
+        <ul>
+          <li>בשעות עבודה: הנהלת בית החולים / מנהל ביטחון.</li>
+          <li>מחוץ לשעות עבודה: רופא/ה תורן/ית מחלקות או אחות/אח כללי/ת.</li>
+        </ul>
+      </details>
+    </div>
+
+    <div class="card" id="ward-step-a" data-title="פינוי מחלקתי – שלב א׳">
+      <h2>פינוי מחלקתי – שלב א׳</h2>
+      <div class="muted">הכרזת “מצב מיוחד בעורף” + מוכנות לפינוי.</div>
+
+      <div class="checklist" data-store="wardA">
+        <label><input type="checkbox"> ארגון המטופלים וכינוסם במקום מרכזי (חדר אוכל/לובי) + דיווח לחדר מצב על מספר ומצב מטופלים</label>
+        <label><input type="checkbox"> איתור מטופלים במסגרות חוץ-מחלקתיות והחזרתם למחלקה</label>
+        <label><input type="checkbox"> חלוקת תפקידים לצוות: תרופות/ציוד רפואי, ציוד אישי לכל מטופל, צוותי ליווי</label>
+        <label><input type="checkbox"> דיווח למשרד אחות ראשית לקבל עזרה</label>
+        <label><input type="checkbox"> קבלת ציוד מהאפסנאות: תרופונים, שקיות ציוד אישי, צמידונים, תיק עזרה ראשונה, ארגזים</label>
+        <label><input type="checkbox"> הכנת רשימה רפואית מצומצמת לכל מטופל + מדבקות + רשימת אנשי קשר</label>
+        <label><input type="checkbox"> הפסקת ביקורים במחלקה</label>
+        <label><input type="checkbox"> הכנת סידור עבודה סיעודי למשמרות 12 שעות</label>
+        <label><input type="checkbox"> דיווח לרופא האחראי במחלקה (לריכוז והעברת מידע למטה)</label>
+      </div>
+
+      <button class="btn" onclick="resetChecklist('wardA')">איפוס סימונים</button>
+    </div>
+
+    <div class="card" id="ward-step-b" data-title="פינוי מחלקתי – שלב ב׳">
+      <h2>פינוי מחלקתי – שלב ב׳</h2>
+      <div class="muted">החלטה על פינוי + ביצוע הפינוי.</div>
+
+      <div class="checklist" data-store="wardB">
+        <label><input type="checkbox"> קבלת הודעה למעבר לאתר השהייה דרך צירי הפינוי במחלקה</label>
+        <label><input type="checkbox"> הכנת תרופונים + ציוד אישי ל-48–72 שעות</label>
+        <label><input type="checkbox"> הצמדת מידע רפואי לכל מטופל + ידונים (בדגש גריאטרי)</label>
+        <label><input type="checkbox"> הצבת עובד ששולט על הכניסה</label>
+        <label><input type="checkbox"> הכנת רשימות מטופלים לפי יעד פינוי</label>
+        <label><input type="checkbox"> קביעת צוות מלווה: 2 אנשי צוות לכל 10 מטופלים</label>
+        <label><input type="checkbox"> תיאום מול מרכז השהייה ורכב הפינוי (מומלץ קבוצות עד 10)</label>
+        <label><input type="checkbox"> בסיום: סריקה כללית, כיבוי אורות/מזגנים</label>
+        <label><input type="checkbox"> נעילת חדר מחלקה וחדר תרופות (לפי יכולת)</label>
+        <label><input type="checkbox"> דיווח לחדר מטה על שלבי התארגנות ואירועים חריגים</label>
+      </div>
+
+      <button class="btn" onclick="resetChecklist('wardB')">איפוס סימונים</button>
+    </div>
+
+    <div class="card" id="staging-center" data-title="מרכז שהייה – אחראי">
+      <h2>מרכז השהייה – סדר פעולות (אחראי מרכז)</h2>
+
+      <details open>
+        <summary><b>שלב א׳ – מוכנות</b></summary>
+        <div class="checklist" data-store="centerA">
+          <label><input type="checkbox"> פתיחת מרכז השהייה בהתאם למיקום הרשום בתיק</label>
+          <label><input type="checkbox"> ציוד משרדי: שולחן/כסאות/מגאפון/שתייה/פירות + כסאות ל-30 מטופלים בהמתנה</label>
+          <label><input type="checkbox"> ציוד כתיבה</label>
+          <label><input type="checkbox"> התמקמות בעמדה עם רשמת (מזכירה רפואית/מטעמה)</label>
+          <label><input type="checkbox"> דיווח התארגנות לחדר מצב</label>
+        </div>
+        <button class="btn" onclick="resetChecklist('centerA')">איפוס סימונים</button>
+      </details>
+
+      <details>
+        <summary><b>שלב ב׳ – ביצוע פינוי</b></summary>
+        <div class="checklist" data-store="centerB">
+          <label><input type="checkbox"> תיאום פינוי מול המחלקות בצורה מדורגת</label>
+          <label><input type="checkbox"> קבלת רשימות מפונים + יעד פינוי + אופן פינוי (אמבולנסים/אלונקות/כיסאות/אלימות וכו׳)</label>
+          <label><input type="checkbox"> קשר עם תחבורה + התאמת רכבים והגעה בהדרגה</label>
+          <label><input type="checkbox"> עדכון מחלקה על הגעת רכב + בקשה ל-10 מטופלים בדרגת מסוכנות/חומרה נמוכה</label>
+          <label><input type="checkbox"> שיבוץ מטופלים+צוות לרכב פינוי + מילוי פרטי רכב</label>
+          <label><input type="checkbox"> לפני עלייה לרכב: תיק עזרה ראשונה + מזון + שתייה</label>
+          <label><input type="checkbox"> לכל מטופל: ידון + סיכום מחלה + תרופון + ציוד אישי</label>
+          <label><input type="checkbox"> עדכון מטה על העלאת מטופלים ויציאת הרכב</label>
+          <label><input type="checkbox"> שליחת הרכב ליעד הפינוי + תיאום רכבים נוספים</label>
+          <label><input type="checkbox"> דיווח למטה על חריגים</label>
+        </div>
+        <button class="btn" onclick="resetChecklist('centerB')">איפוס סימונים</button>
+      </details>
+    </div>
+
+    <div class="card" id="transfer" data-title="העברת מאושפז – Checklist">
+      <h2>העברת מאושפז מהמחלקה (Checklist)</h2>
+      <div class="callout">
+        <b>חובה:</b> ידון (תג זיהוי) קריא על יד המטופל.
+      </div>
+
+      <details open>
+        <summary><b>נתונים רפואיים/סיעודיים</b></summary>
+        <ul>
+          <li>דמוגרפיה</li>
+          <li>קרובי משפחה/אפוטרופוס – טלפונים</li>
+          <li>רגישויות / תרופות רגישות</li>
+          <li>חיסונים, תשובות מעבדה</li>
+          <li>ניידות</li>
+          <li>תקשורת/קוגניציה</li>
+          <li>פצעים</li>
+          <li>אחר לפי צורך</li>
+        </ul>
+      </details>
+
+      <details>
+        <summary><b>חפצי המאושפז</b></summary>
+        <ul>
+          <li>מכשיר שמיעה</li>
+          <li>משקפיים</li>
+          <li>לבוש: פיג׳מה/ביגוד אישי</li>
+        </ul>
+      </details>
+
+      <details>
+        <summary><b>תרופות ואחר</b></summary>
+        <ul>
+          <li>שקית תרופות עם מדבקה/שם</li>
+          <li>שקית שתן נוספת (לפי צורך)</li>
+          <li>בקבוק מים</li>
+          <li>אמצעי שינוע מסומן (כיסא גלגלים/הליכון/אלונקה)</li>
+        </ul>
+      </details>
+    </div>
+
+    <div class="card" id="fire" data-title="שריפה – נוהל סיעודי">
+      <h2>שריפה / התראת אש – נוהל תפעולי לצוות סיעוד</h2>
+
+      <div class="grid2">
+        <div class="callout danger">
+          <b>עקרונות מיידיים</b>
+          <ul>
+            <li>דיווח למוקד ביטחון מיידית</li>
+            <li>ניסיון כיבוי במטף (אם בטוח)</li>
+            <li>אין להתיז מים על חשמל</li>
+            <li>חל איסור להשתמש במעליות</li>
+          </ul>
+        </div>
+        <div class="callout">
+          <b>אחריות אחות/אח אחראי/ת</b>
+          <ul>
+            <li>צוות מכיר מיקום מטפים/גלגילונים</li>
+            <li>היכרות יציאות חירום + דלתות אש + כפתורי פתיחה</li>
+            <li>היכרות מפסק ניתוק חשמל בתחנת אחיות/לוח ראשי</li>
+          </ul>
+        </div>
+      </div>
+
+      <details open>
+        <summary><b>סדר פעולות במחלקה (בקצרה)</b></summary>
+        <ol>
+          <li>דיווח למוקד ביטחון.</li>
+          <li>סריקה לאיתור מקור התראה/אש.</li>
+          <li>אם התראת שווא – עדכון ביטחון לביטול כבאות.</li>
+          <li>אם שריפה: כיבוי באמצעים קיימים, הרחקת מטופלים/מבקרים.</li>
+          <li>פינוי לפי צורך לחצר/מחוץ למחלקה + ספירה + רשימת נוכחות.</li>
+          <li>סריקת חדרים וסימון X כדי לוודא שאין לכודים.</li>
+        </ol>
+        <p class="muted">ניתוק חשמל – רק לפי הנחיה/אישור ובהתאם לנוהל המקומי.</p>
+      </details>
+    </div>
+
+    <div class="card" id="earthquake" data-title="רעידת אדמה – נוהל סיעודי">
+      <h2>רעידת אדמה – מה עושים</h2>
+
+      <details open>
+        <summary><b>בזמן הרעידה</b></summary>
+        <ul>
+          <li>עדיפות: יציאה למרחב פתוח (אם אפשר ובטוח).</li>
+          <li>במחלקות סגורות: לחיצה על כפתור “פתיחת דלתות כללי” (אדום בפנל).</li>
+          <li>אם לא ניתן לצאת: מחסה מפני התמוטטות/חפצים נופלים (מתחת לשולחן/מיטה), או ישיבה בצמוד לקיר פנימי והגנה על הראש.</li>
+          <li>בחדרי חולים: להנחות ניידים לתפוס מחסה; לבלתי ניידים – כריות להגנה על הראש.</li>
+        </ul>
+      </details>
+
+      <details>
+        <summary><b>אחרי הרעידה</b></summary>
+        <ul>
+          <li>פינוי המחלקה לאתרי השהייה לפי נהלי פינוי בחירום.</li>
+          <li>העברת מידע מאתרי השהייה למטה שע״ח.</li>
+          <li>חזרה למבנה רק באישור גורם מוסמך.</li>
+        </ul>
+      </details>
+    </div>
+
+    <div class="card" id="assembly" data-title="נקודות כינוס">
+      <h2>נקודות כינוס / שהייה (תמצית)</h2>
+      <p class="muted">להלן דוגמאות מתוך התיק – יש לעדכן לפי האתר/מחלקה שלכם.</p>
+
+      <details>
+        <summary><b>באר יעקב – נקודות כינוס</b></summary>
+        <ul>
+          <li>חניון מבקרים: משאבי אנוש, גזברות, מיון, מרפאות חוץ, בית מרקחת, טיפול יום, אפסנאות ועוד</li>
+          <li>כיכר ראשית: תחבורה, חצר וגן, אחזקה, הנהלה, מטבח ועוד</li>
+          <li>רחבת כניסה צאלה+ECT</li>
+          <li>רחבת הוסטלים</li>
+          <li>חניון עורפי מחלקות – נקודת כינוס חליפית</li>
+        </ul>
+      </details>
+
+      <details>
+        <summary><b>נס ציונה – נקודות כינוס</b></summary>
+        <ul>
+          <li>חניון מיון אחורי: הנהלה, הנהלת הסיעוד, מרפאות חוץ, בית מרקחת ועוד</li>
+          <li>רחבת ספורט מחלקות גשר+בריאה ועוד</li>
+          <li>חניון נעורים+בראשית (כולל מרפאת ילדים ונוער)</li>
+        </ul>
+      </details>
+    </div>
+
+    <div class="card" id="notes" data-title="הערות ועדכונים">
+      <h2>הערות ועדכונים</h2>
+      <ul class="muted">
+        <li>מומלץ להוסיף כאן: “מי תורן היום”, “מיקום חדר מצב”, “תיקי ציוד”, “תדריכי צוות”.</li>
+        <li>אפשר לשמור באתר הזה גם קישורים למסמכי PDF פנימיים.</li>
+      </ul>
+    </div>
+
+  </section>
+</main>
+
+<script>
+  // Build nav
+  const cards = [...document.querySelectorAll('[data-title]')];
+  const nav = document.getElementById('nav');
+  cards.forEach(c => {
+    const a = document.createElement('a');
+    a.href = '#' + c.id;
+    a.innerHTML = `<span>${c.dataset.title}</span><span class="badge">${c.querySelectorAll('details').length ? 'סעיפים' : 'דף'}</span>`;
+    nav.appendChild(a);
+  });
+
+  // Search filter
+  const q = document.getElementById('q');
+  function normalize(s){ return (s||'').toLowerCase().replace(/[״"]/g,'').trim(); }
+  function runSearch(){
+    const term = normalize(q.value);
+    cards.forEach(c => {
+      const text = normalize(c.innerText);
+      c.style.display = (!term || text.includes(term)) ? '' : 'none';
+    });
+  }
+  q.addEventListener('input', runSearch);
+
+  // Ctrl+K focus search
+  window.addEventListener('keydown', (e)=>{
+    if((e.ctrlKey || e.metaKey) && e.key.toLowerCase()==='k'){
+      e.preventDefault(); q.focus();
+    }
+  });
+
+  // Expand / collapse all details
+  let expanded = true;
+  document.getElementById('toggleAll').addEventListener('click', ()=>{
+    const all = document.querySelectorAll('details');
+    expanded = !expanded;
+    all.forEach(d => d.open = expanded);
+  });
+
+  // Checklist persistence (localStorage)
+  function loadChecklists(){
+    document.querySelectorAll('.checklist').forEach(box=>{
+      const key = box.getAttribute('data-store');
+      if(!key) return;
+      const saved = JSON.parse(localStorage.getItem('chk_'+key) || '[]');
+      const inputs = [...box.querySelectorAll('input[type="checkbox"]')];
+      inputs.forEach((inp,i)=> inp.checked = !!saved[i]);
+      box.addEventListener('change', ()=>{
+        const state = inputs.map(x=>x.checked);
+        localStorage.setItem('chk_'+key, JSON.stringify(state));
+      });
+    });
+  }
+  function resetChecklist(key){
+    localStorage.removeItem('chk_'+key);
+    document.querySelectorAll(`.checklist[data-store="${key}"] input[type="checkbox"]`).forEach(x=>x.checked=false);
+  }
+  window.resetChecklist = resetChecklist;
+  loadChecklists();
+</script>
+</body>
+</html>
